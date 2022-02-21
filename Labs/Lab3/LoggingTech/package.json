@@ -1,0 +1,17 @@
+{
+  "name": "loggingtech",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": " node app.js"
+  },
+  "author": "Aditya Parab",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.3",
+    "express-winston": "^4.2.0",
+    "winston": "^3.6.0"
+  }
+}
