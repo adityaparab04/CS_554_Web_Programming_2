@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import SearchCharacters from "./SearchCharacters";
 import NotFound from './NotFound';
-
+import noImage from '../img/imageNotAvail.jpeg';
 import {
     Card,
     CardActionArea,
@@ -43,7 +43,7 @@ const useStyles = makeStyles({
     }
   });
 
-const CharacterList = (props) => {
+const CharacterList = () => {
 
     //marvel api authentication
     const md5 = require('blueimp-md5');
@@ -113,8 +113,8 @@ const CharacterList = (props) => {
                         <CardMedia
                             className={classes.media}
                             component='img'
-                            image={
-                            `${character.thumbnail.path}/portrait_uncanny.${character.thumbnail.extension}`
+                            image={ character.thumbnail.path !== 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available' ?
+                            `${character.thumbnail.path}/portrait_uncanny.${character.thumbnail.extension}` : noImage
                             }
                             title='character image'
                         />
@@ -153,14 +153,14 @@ const CharacterList = (props) => {
                 <h2>Loading....</h2>
             </div>
         );
-    }else if (offset>totalResults){
+    }else if (offset>=totalResults){
         return(
             <NotFound/>
         )
     }else{
         return(
             <div>
-                <h1>MARVEL CHARACTERS LIST</h1>
+                <h2>MARVEL CHARACTERS LIST</h2>
                 <SearchCharacters searchValue={searchValue} />
                 <br/>
                 <br/>

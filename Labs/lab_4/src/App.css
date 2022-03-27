@@ -33,7 +33,7 @@ p {
 
 .navLink {
   padding: 0.3rem 0.6rem;
-  background-color: #ed1d24;
+  background-color: #ec0e19;
   border-radius: 3px;
   color: white;
   text-decoration: none !important;
@@ -55,7 +55,7 @@ p {
   font-weight: 600;
 }
 .paginatedLink:hover {
-  color: #ed1d24;
+  color: #ec0e19;
 }
 .paginationDiv {
   margin: auto;
@@ -72,7 +72,7 @@ p {
 }
 .title {
   font-weight: bold;
-  color: #ed1d24;
+  color: #ec0e19;
 }
 .homePage {
   margin-top: 2rem;
@@ -84,5 +84,21 @@ p {
 }
 .cardLink:hover {
   text-decoration: none;
-  color: #ed1d24;
+  color: #ec0e19;
+}
+
+.seriesContainer {
+  border: 10px;
+  border-width: 1em;
+  margin: 10px;
+}
+.seriesInfoContainer {
+  text-align: left;
+}
+.seriesTitleContainer {
+  text-align: center;
+}
+.seriesImageContainer {
+  float: left;
+  margin-left: 1rem;
 }

@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import SearchSeries from './SearchSeries'
 import NotFound from './NotFound';
+import noImage from '../img/imageNotAvail.jpeg';
 
 import {
     Card,
@@ -113,8 +114,8 @@ const SeriesList = () => {
                         <CardMedia
                             className={classes.media}
                             component='img'
-                            image={
-                            `${series.thumbnail.path}/portrait_uncanny.${series.thumbnail.extension}`
+                            image={ series.thumbnail.path !== 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available' ?
+                            `${series.thumbnail.path}/portrait_fantastic.${series.thumbnail.extension}` : noImage
                             }
                             title='series image'
                         />
@@ -159,7 +160,7 @@ const SeriesList = () => {
     }else{
         return(
             <div>
-                <h1>MARVEL SERIES LIST</h1>
+                <h2>MARVEL SERIES LIST</h2>
                 <SearchSeries searchValue={searchValue}/>
                 <br/>
                 <br/>

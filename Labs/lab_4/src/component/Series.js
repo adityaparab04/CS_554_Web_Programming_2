@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useParams } from 'react-router-dom';
-import noImage from '../img/download.jpeg';
+import noImage from '../img/imageNotAvail.jpeg';
 import NotFound from '../component/NotFound';
 import {
     makeStyles,
@@ -14,7 +14,7 @@ import {
 import '../App.css';
 const useStyles = makeStyles({
     card: {
-      maxWidth: 450,
+      maxWidth: 550,
       height: 'auto',
       marginTop: 20,
       marginLeft: 'auto',
@@ -100,10 +100,10 @@ const Series = () => {
                 <CardMedia 
                     className={classes.media} 
                     component='img' 
-                    image={
-                        `${seriesData.thumbnail.path}/portrait_uncanny.${seriesData.thumbnail.extension}` ? `${seriesData.thumbnail.path}/portrait_uncanny.${seriesData.thumbnail.extension}` : noImage
-                        } 
-                    title='Character image'
+                    image={ seriesData.thumbnail.path !== 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available' ?
+                        `${seriesData.thumbnail.path}/portrait_uncanny.${seriesData.thumbnail.extension}` : noImage
+                    }  
+                    title='Series image'
                 />
                 <CardContent>
                 <Typography variant='body2' color='textSecondary' component='span'></Typography>
@@ -112,6 +112,47 @@ const Series = () => {
                         <dt className='title'>Description:</dt>
                         <dd>{description}</dd>
                     </p>
+                    <p>
+                        <dt className='title'>Start Year:</dt>
+                        {
+                            seriesData.startYear ? 
+                            <dd>{seriesData.startYear}</dd> : 
+                            <dd>N/A</dd>
+                        }
+                    </p>
+                    <p>
+                        <dt className='title'>End Year:</dt>
+                        {
+                            seriesData.endYear ? 
+                                seriesData.endYear === 2099 ? 
+                                    <dd>Ongoing</dd> : seriesData.endYear : 
+                            <dd>N/A</dd>
+                        }
+                    </p>
+                    <p>
+                        <dt className='title'>Rating:</dt>
+                        {
+                            seriesData.rating ? 
+                            <dd>{seriesData.rating}</dd> : 
+                            <dd>N/A</dd>
+                        }
+                    </p>
+                    <p>
+                        <dt className='title'>Characters Featured:</dt>
+                        {
+                            seriesData.characters.items.length>0 ? seriesData.characters.items.map((character) => {
+                                return <dd key={character.resourceURI.substring(47)}><Link to={`/characters/${character.resourceURI.substring(47)}`}>{character.name}</Link></dd>
+                            }) : <dd>N/A</dd> 
+                        }
+                    </p>
+                    <p>
+                    <dt className='title'>Comics:</dt>
+                    {
+                        seriesData.comics.items.length>0 ? seriesData.comics.items.map((comic) => {
+                            return <dd key={comic.resourceURI.substring(43)}><Link to={`/comics/${comic.resourceURI.substring(43)}`}>{comic.name}</Link></dd>
+                        }) : <dd>N/A</dd> 
+                    }
+                </p>
                 </dl>
                 </CardContent>
             </Card>

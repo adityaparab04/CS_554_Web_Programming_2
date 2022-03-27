@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useParams } from 'react-router-dom';
-import noImage from '../img/download.jpeg';
+import noImage from '../img/imageNotAvail.jpeg';
 import NotFound from '../component/NotFound';
 import {
     makeStyles,
@@ -100,10 +100,10 @@ const Comic = () => {
                 <CardMedia 
                     className={classes.media} 
                     component='img' 
-                    image={
-                        `${comicData.thumbnail.path}/portrait_uncanny.${comicData.thumbnail.extension}` ? `${comicData.thumbnail.path}/portrait_uncanny.${comicData.thumbnail.extension}` : noImage
-                        } 
-                    title='Character image'
+                    image={ comicData.thumbnail.path !== 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available' ?
+                        `${comicData.thumbnail.path}/portrait_uncanny.${comicData.thumbnail.extension}` : noImage
+                    } 
+                    title='Comic image'
                 />
                 <CardContent>
                 <Typography variant='body2' color='textSecondary' component='span'></Typography>
@@ -117,7 +117,7 @@ const Comic = () => {
                         {
                             comicData.characters.items.length>0 ? 
                             comicData.characters.items.map((character) => {
-                                return <dd><Link className="cardLink" to={`/characters/${character.resourceURI.substring(47)}`}>{character.name}</Link></dd>
+                                return <dd key={character.resourceURI.substring(47)}><Link className="cardLink" to={`/characters/${character.resourceURI.substring(47)}`}>{character.name}</Link></dd>
                             }) : <dd>N/A</dd>
                         }
                     </p>
@@ -134,7 +134,7 @@ const Comic = () => {
                         {
                             comicData.variants.length>0 ? 
                             comicData.variants.map((variant) => {
-                                return <dd><Link className="cardLink" to={`/comics/${variant.resourceURI.substring(43)}`}>{variant.name}</Link></dd>
+                                return <dd key={variant.resourceURI.substring(43)}><Link className="cardLink" to={`/comics/${variant.resourceURI.substring(43)}`}>{variant.name}</Link></dd>
                             }) : <dd>N/A</dd>
                         }
                     </p>

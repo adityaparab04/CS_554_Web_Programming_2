@@ -19,9 +19,9 @@ function App() {
           <Link to='/'>
             <img src={logo} alt='Marvel Logo' className="App-logo"/>
           </Link>
-          <h2 className='App-title'>
+          <h1 className='App-title'>
             Welcome to the React.js Marvel API Lab
-          </h2>
+          </h1>
           <nav>
           <Link className='navLink' to='/'>Home</Link>
           <Link className='navLink' to='/characters/page/0'>Characters</Link>

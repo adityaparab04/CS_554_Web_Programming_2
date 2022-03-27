@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useParams } from 'react-router-dom';
 import NotFound from '../component/NotFound';
+import noImage from '../img/imageNotAvail.jpeg';
 import {
     makeStyles,
     Card,
@@ -98,9 +99,10 @@ const Character = () => {
                 <CardHeader className={classes.titleHead} title={characterData.name} />
                 <CardMedia 
                     className={classes.media} 
-                    component='img' 
-                    image={
-                        `${characterData.thumbnail.path}/portrait_uncanny.${characterData.thumbnail.extension}` } 
+                    component='img'
+                    image={ characterData.thumbnail.path !== 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available' ?
+                        `${characterData.thumbnail.path}/portrait_uncanny.${characterData.thumbnail.extension}` : noImage
+                    } 
                     title='Character image'
                 />
                 <CardContent>
@@ -114,7 +116,7 @@ const Character = () => {
                         <dt className='title'>Comics Featured:</dt>
                         {characterData.comics.items.length > 0 ?
                              characterData.comics.items.map((comics) => {
-                            return (<dd><Link className="cardLink" to={`/comics/${comics.resourceURI.substring(43)}`}>{comics.name}</Link></dd>)
+                            return (<dd key={comics.resourceURI.substring(43)}><Link className="cardLink" to={`/comics/${comics.resourceURI.substring(43)}`}>{comics.name}</Link></dd>)
                         }) : <dd> Not featured in any Comics</dd>  
                     }
                     </p>
@@ -122,7 +124,7 @@ const Character = () => {
                         <dt className='title'>Series Featured</dt>
                         {characterData.series.items.length > 0 ?
                             characterData.series.items.map((series) => {
-                                return(<dd><Link className="cardLink" to={`/series/${series.resourceURI.substring(43)}`}>{series.name}</Link></dd>)
+                                return(<dd key={series.resourceURI.substring(43)} ><Link className="cardLink" to={`/series/${series.resourceURI.substring(43)}`}>{series.name}</Link></dd>)
                         }) : <dd>Not featured in any Series</dd>
                         }
                     </p>
