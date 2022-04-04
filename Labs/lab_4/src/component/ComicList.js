@@ -63,6 +63,7 @@ const ComicList = () => {
     const [ searchTerm, setSearchTerm ] = useState("");
     const [ limit ] = useState(20);
     const [ totalResults, setTotalResults ] = useState(0);
+    const [count, setCount] = useState(0);
     const { page } = useParams();
     const offset = limit * page;
     const classes = useStyles();
@@ -76,6 +77,7 @@ const ComicList = () => {
                 console.log(data.data);
                 setComicsData(data.data.results);
                 setTotalResults(data.data.total);
+                setCount(data.data.count);
                 setLoading(false);
                 window.scrollTo(0, 0);
             }catch(e){
@@ -154,7 +156,7 @@ const ComicList = () => {
                 <h2>Loading....</h2>
             </div>
         );
-    }else if (offset>=totalResults){
+    }else if (comicsData.length === 0){
         return(
             <NotFound/>
         )
@@ -175,7 +177,7 @@ const ComicList = () => {
                     <Link className='paginatedLink' to={`/comics/page/${parseInt(page) - 1}`}>PREV</Link>
                     }
                     {' '}{page}{' '}
-                    {offset<totalResults-limit && searchTerm === '' &&
+                    {offset<totalResults-limit && count === limit && searchTerm === '' &&
                     <Link className='paginatedLink' to={`/comics/page/${parseInt(page) + 1}`}>NEXT</Link>
                     }
                 </div>

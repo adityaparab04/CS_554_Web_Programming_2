@@ -63,6 +63,7 @@ const SeriesList = () => {
     const [ searchTerm, setSearchTerm ] = useState("");
     const [ limit ] = useState(20);
     const [ totalResults, setTotalResults ] = useState(0);
+    const [ count, setCount ] = useState(0);
     const { page } = useParams();
     const offset = limit * page;
     
@@ -76,6 +77,7 @@ const SeriesList = () => {
                 console.log(data.data);
                 setSeriesData(data.data.results);
                 setTotalResults(data.data.total);
+                setCount(data.data.count);
                 setLoading(false);
                 window.scrollTo(0, 0);
             }catch(e){
@@ -153,7 +155,7 @@ const SeriesList = () => {
                 <h2>Loading...</h2>
             </div>
         );
-    }else if(offset>=totalResults){
+    }else if(seriesData.length === 0){
         return(
             <NotFound/>
         );
@@ -174,7 +176,7 @@ const SeriesList = () => {
                     <Link className='paginatedLink' to={`/series/page/${parseInt(page) - 1}`}>PREV</Link>
                     }
                     {' '}{page}{' '}
-                    {offset<totalResults-limit && searchTerm === '' &&
+                    {offset<totalResults-limit  && count === limit && searchTerm === '' &&
                     <Link className='paginatedLink' to={`/series/page/${parseInt(page) + 1}`}>NEXT</Link>
                     }
                 </div>

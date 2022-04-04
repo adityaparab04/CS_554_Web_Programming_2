@@ -61,6 +61,7 @@ const CharacterList = () => {
     const [ charactersData, setCharactersData ] = useState(undefined);
     const [ searchTerm, setSearchTerm ] = useState("");
     const [ limit ] = useState(20);
+    const [ count, setCount ] = useState(0);
     const [ totalResults, setTotalResults ] = useState(0);
     const { page } = useParams();
     const offset = limit * page;
@@ -73,9 +74,10 @@ const CharacterList = () => {
             try{
                 const { data } = await axios.get(`${url}&limit=${limit}&offset=${offset}`);
                 console.log(data.data);
-                setLoading(false);
                 setCharactersData(data.data.results);
                 setTotalResults(data.data.total);
+                setCount(data.data.count);
+                setLoading(false);
                 window.scrollTo(0, 0);
             }catch(e){
                 console.log(e);
@@ -153,7 +155,7 @@ const CharacterList = () => {
                 <h2>Loading....</h2>
             </div>
         );
-    }else if (offset>=totalResults){
+    }else if (charactersData.length === 0){
         return(
             <NotFound/>
         )
@@ -174,7 +176,7 @@ const CharacterList = () => {
                     <Link className='paginatedLink' to={`/characters/page/${parseInt(page) - 1}`}>PREV</Link>
                     }
                     {' '}{page}{' '}
-                    {offset<totalResults-limit && searchTerm === '' &&
+                    {offset<totalResults-limit  && count === limit && searchTerm === '' &&
                     <Link className='paginatedLink' to={`/characters/page/${parseInt(page) + 1}`}>NEXT</Link>
                     }
                 </div>
