@@ -60,17 +60,7 @@ li {
   border-bottom-color: lightgrey;
 }
 
-.binnedButton,
-.deleteButton {
-  background-color: #0095ff;
-  border: 1px solid transparent;
-  border-radius: 3px;
-  box-shadow: rgba(255, 255, 255, .4) 0 1px 0 0 inset;
-  box-sizing: border-box;
-  display: inline-block;
-}
-
-.binnedButton {
+.binnedButton, .deleteBtn {
   appearance: button;
   background-color: #1652F0;
   border: 1px solid #1652F0;
@@ -87,7 +77,7 @@ li {
   width: fit-content;
 }
 
-.binnedButton:hover {
+.binnedButton:hover, .deleteBtn:hover {
   background-color: #0A46E4;
   border-color: #0A46E4;
 }
