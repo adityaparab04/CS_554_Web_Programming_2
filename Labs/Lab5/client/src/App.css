@@ -1,0 +1,146 @@
+.App {
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.App-header {
+  background-color: #28547a;
+	height: 200px;
+	padding: 20px;
+	color: black;
+	position: relative;
+}
+
+.App-logo {
+  text-align: left;
+  margin-top: 0.5rem;
+  height: 70px;
+  position: relative;
+}
+
+.navLink {
+  padding: 0.3rem 0.6rem;
+  background-color: black;
+  border-radius: 3px;
+  color: white;
+  text-decoration: none !important;
+  margin: 5px;
+}
+
+.navLink:hover {
+  background-color: white;
+  border: 2px solid black;
+  color: black;
+  border-radius: 5px;
+}
+
+.newPostContainer{
+  text-align: left;
+  margin: 20px 20px;
+}
+
+/* home page content */
+
+.image {
+  height: 400px;
+  width: 400px;
+}
+li {
+  text-align: center;
+  justify-content: center;
+  list-style-type: none;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  margin-top: 5px;
+}
+
+.post {
+  margin-right: 20px;
+  border-bottom-style: solid;
+  border-bottom-color: lightgrey;
+}
+
+.binnedButton,
+.deleteButton {
+  background-color: #0095ff;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  box-shadow: rgba(255, 255, 255, .4) 0 1px 0 0 inset;
+  box-sizing: border-box;
+  display: inline-block;
+}
+
+.binnedButton {
+  appearance: button;
+  background-color: #1652F0;
+  border: 1px solid #1652F0;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1.15;
+  overflow: visible;
+  padding: 6px 16px;
+  position: relative;
+  text-align: center;
+  width: fit-content;
+}
+
+.binnedButton:hover {
+  background-color: #0A46E4;
+  border-color: #0A46E4;
+}
+
+.getMore {
+  background-color: #fff;
+  border: 1px solid #d5d9d9;
+  border-radius: 8px;
+  box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+  box-sizing: border-box;
+  color: #0f1111;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 13px;
+  line-height: 29px;
+  padding: 0 10px 0 11px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  width: 100px;
+  margin-left: 2%;
+}
+
+.getMore:hover {
+  background-color: grey;
+}
+
+.form {
+  margin-top: 2%;
+  margin-left: 2%;
+}
+
+.submit {
+  background-color: lightcyan; /* Green */
+  border: solid;
+  color: black;
+  padding: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+h1 {
+  margin-left: 2%;
+}
+
+h2 {
+  margin-left: 5%;
+  font-size: 30px;
+  color: Black;
+  text-align: center;
+}
