@@ -20,10 +20,11 @@ const typeDefs = gql `
         unsplashImages(pageNum: Int): [ImagePost]
         binnedImages: [ImagePost]
         userPostedImages: [ImagePost]
+        getTopTenBinnedPosts: [ImagePost]
     }
     type Mutation {
         uploadImage(url: String!, description: String, posterName: String): ImagePost
-        updateImage(id: ID!, url: String, posterName: String, description: String, userPosted: Boolean, binned: Boolean): ImagePost
+        updateImage(id: ID!, url: String, posterName: String, description: String, userPosted: Boolean, binned: Boolean, numBinned: Int): ImagePost
         deleteImage(id:ID!): ImagePost
     }
     type ImagePost {
@@ -33,6 +34,7 @@ const typeDefs = gql `
         description: String
         userPosted: Boolean!
         binned: Boolean!
+        numBinned: Int
     }
 `
 
@@ -54,7 +56,8 @@ async function fetchImages(pageNum){
                 description: img.description,
                 posterName: img.user.name,
                 userPosted: false,
-                binned: binned
+                binned: binned,
+                numBinned: img.likes
             }
             return image;
         });
@@ -87,23 +90,55 @@ async function fetchUserPostedImages(){
     let userPosted = await client.LRANGE("userposted", 0, -1);
     try{
         let images = [];
-        userPosted.map((image) => {
-            let imageObj = JSON.parse(image);
-            if(imageObj.userPosted === true){
-                images.push(imageObj);
+        for(const image of userPosted){
+            let img = await client.GET(image);
+            let imgObject = JSON.parse(img);
+            if(imgObject.userPosted === true){
+                if(imgObject.userPosted){
+                    images.push(imgObject);
+                }
             }
-        })
+        }
         return images;
     }catch(e){
         console.log(e);
     }
 }
 
+async function fetchTopTenBinnedPosts(){
+    try{
+        let binImageList = await fetchBinnedImages();
+        let popularBinList = [];
+        // console.log(binImageList);
+        for(const binImage of binImageList){
+            console.log(binImage)
+            // await client.zAdd( "topImages", binImage.numBinned.toString(), JSON.stringify(binImage));
+            await client.ZADD("topImages", {
+                score: binImage.numBinned.toString(),
+                value: JSON.stringify(binImage),
+            });
+        }
+        let topTenImages = await client.sendCommand(["ZRANGE", "topImages", 0, 9, "rev"]);
+        // console.log(topTenImages);
+        await client.DEL("topImages");
+        
+        for(const image of topTenImages){
+            imageObj = JSON.parse(image);
+            popularBinList.push(imageObj);
+        }
+        return popularBinList;
+    }catch(e){
+        console.log(e);
+    }
+    
+}
+
 const resolvers = {
     Query:{
         unsplashImages: (_, args) => fetchImages(args.pageNum),
         binnedImages: () => fetchBinnedImages(),
-        userPostedImages: () => fetchUserPostedImages()
+        userPostedImages: () => fetchUserPostedImages(),
+        getTopTenBinnedPosts: () => fetchTopTenBinnedPosts()
     },
     Mutation:{
         // upload image
@@ -124,10 +159,11 @@ const resolvers = {
                     description: args.description,
                     posterName: args.posterName,
                     userPosted: true,
-                    binned: false
+                    binned: false,
+                    numBinned: 0
                 };
                 await client.SET(imageData.id, JSON.stringify(imageData));
-                await client.RPUSH('userposted', JSON.stringify(imageData));
+                await client.RPUSH('userposted', imageData.id);
                 return imageData;
             }catch(e){
                 console.log(e);
@@ -142,27 +178,24 @@ const resolvers = {
                     posterName: args.posterName,
                     description: args.description,
                     userPosted: args.userPosted,
-                    binned: args.binned
+                    binned: args.binned,
+                    numBinned: args.numBinned
                 }
                 let cacheData = JSON.parse(await client.GET(args.id));
                 
-                //logic for bin the image
-                if(!cacheData){
-                    if(args.binned){
-                        await client.SET(args.id, JSON.stringify(updatedImageData));
-                        await client.RPUSH('binned', args.id);
-                    }else{
-                        await client.LREM('binned', 0, args.id);
-                        await client.DEL(args.id);
-                    }   
-                }else{
-                    if(args.binned){
-                        await client.SET(args.id, JSON.stringify(updatedImageData));
-                        await client.RPUSH('binned', args.id);
-                    }else{
-                        await client.LREM('binned', 0, args.id);
-                        await client.DEL(args.id);
-                    }
+                //logic for binning the image
+                if(args.binned === true && !cacheData && args.userPosted === false){
+                    await client.SET(args.id, JSON.stringify(updatedImageData));
+                    await client.RPUSH('binned', args.id);
+                }else if(args.binned === false && args.userPosted === false){
+                    await client.LREM('binned', 0, args.id);
+                    await client.DEL(args.id);
+                }else if(args.binned === true && args.userPosted === true){
+                    await client.SET(args.id, JSON.stringify(updatedImageData));
+                    await client.RPUSH('binned', args.id);
+                }else if(args.binned === false && args.userPosted === true){
+                    await client.LREM('binned', 0, args.id);
+                    await client.SET(args.id, JSON.stringify(updatedImageData));
                 }
                 return updatedImageData;
             }catch(e){

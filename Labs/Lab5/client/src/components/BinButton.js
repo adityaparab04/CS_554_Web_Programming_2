@@ -12,7 +12,8 @@ const BinButton = (props) => {
                 "posterName": img.posterName,
                 "description": img.description,
                 "userPosted": img.userPosted,
-                "binned": true
+                "binned": true,
+                "numBinned": img.numBinned
             }})}
         }else if((img.binned === true)){
             {editImage({variables:{
@@ -21,7 +22,8 @@ const BinButton = (props) => {
               "posterName": img.posterName,
               "description": img.description,
               "userPosted": img.userPosted,
-              "binned": false
+              "binned": false,
+              "numBinned": img.numBinned
         }})}
     }
 }

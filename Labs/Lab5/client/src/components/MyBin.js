@@ -13,14 +13,13 @@ const MyBin = () => {
                 <ul>
                     {data.binnedImages.map(element =>{
                     return(  
-                    <div className = "post" key = {element.id}>
-                        <li>
+                        <li className = "post" key = {element.id}>
                             <img src = {element.url} alt = "image" className = "image"/>
                             <p>Description: {element.description}</p>
                             <p>Author: {element.posterName}</p>
+                            <p>Likes: {element.numBinned}</p>
+                            <BinButton element={element}/>
                         </li>
-                        <BinButton element={element}/>
-                    </div>
                     )}
                     )}  
                 </ul>
@@ -33,10 +32,6 @@ const MyBin = () => {
     }else if(error){
         return(
             <div><h2>{error.message}</h2></div>
-        )
-    }else{
-        return(
-            <div><h2>No binned images</h2></div>
         )
     }
 }

@@ -7,6 +7,7 @@ import MyBin from './components/MyBin';
 import MyPosts from './components/MyPosts';
 import NotFound from './components/NotFound';
 import NewPost from './components/NewPost';
+import PopularImages from './components/PopularPosts';
 import {
   ApolloClient,
   HttpLink,
@@ -35,6 +36,7 @@ function App() {
             <Link to='/' className='navLink'>Home</Link>
             <Link to='/my-bin' className='navLink'>My Bin</Link>
             <Link to='/my-posts' className='navLink'>My Posts</Link>
+            <Link to='/popularity' className='navLink'>Most Popular</Link>
           </nav>
           </header>
           <Routes>
@@ -42,6 +44,7 @@ function App() {
             <Route path='/my-bin' element={<MyBin />} />
             <Route path='/my-posts' element={<MyPosts />} />
             <Route path='/new-post' element={<NewPost/>} />
+            <Route path='/popularity' element={<PopularImages/>} />
             <Route path='/*' element={<NotFound/>} />
           </Routes>
         </Router>

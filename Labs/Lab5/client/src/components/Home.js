@@ -17,14 +17,13 @@ const Home = () => {
                 <ul>
                     {data.unsplashImages.map(element =>{
                     return(  
-                    <div className = "post" key = {element.id}>
-                    <li>
+                    <li className = "post" key = {element.id}>
                         <img src = {element.url} alt = "image" className = "image"/>
                         <p>Description: {element.description}</p>
                         <p>Author: {element.posterName}</p>
-                        </li>
+                        <p>Likes: {element.numBinned}</p>
                         <BinButton element={element}/>
-                    </div>
+                    </li>
                     )}
                     )}  
                 </ul>

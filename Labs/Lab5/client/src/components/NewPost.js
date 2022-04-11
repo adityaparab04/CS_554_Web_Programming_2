@@ -33,47 +33,53 @@ const NewPost = () => {
             description.value='';
             posterName.value='';
         }}>
+        <h2>Create a new post..!</h2>
         <div className='form-group'>
         <label>
         Enter Url:
+        <br/>
         <input ref={(node)=>{
             url=node;
         }}
         required
         autoFocus={true}
+        className='form-control'
         />
         </label>
         </div>
         <div className='form-group'>
-        <label>
-        Enter Description:
-        <input ref={(node)=>{
-            description=node;
-        }}
-        required
-        autoFocus={true}
-        />
-        </label>
+            <label>
+                Enter Description:
+                <br/>
+                <input ref={(node)=>{
+                    description=node;
+                }}
+                required
+                className='form-control'
+                />
+            </label>
         </div>
         <div className='form-group'>
-        <label>
-        Enter Poster Name:
-        <input ref={(node)=>{
-            posterName=node;
-        }}
-        required
-        autoFocus={true}
-        />
-        </label>
+            <label>
+                Enter Poster Name:
+                <br/>
+                <input ref={(node)=>{
+                    posterName=node;
+                }}
+                required
+                className='form-control'
+                />
+            </label>
         </div>
-        <button className='addPost' type='submit'> Post? </button>
+        <div className='postButton'>
+            <button className='addPost' type='submit'> Post </button>
+        </div>
         </form>
 
     )
     return (
         <div>
-            <h2>Create a new post..!</h2>
-            {body}
+            <div className='formContainer'>{body}</div>
         </div>
     )
 }
