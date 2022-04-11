@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React  from 'react';
 import queries from '../queries';
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import '../App.css';
 
 const DeleteButton = (props) => {

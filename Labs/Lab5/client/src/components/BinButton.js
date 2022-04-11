@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { useMutation } from '@apollo/client';
 import queries from '../queries';
 
