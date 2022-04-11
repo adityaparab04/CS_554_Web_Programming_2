@@ -18,7 +18,7 @@ const Home = () => {
                     {data.unsplashImages.map(element =>{
                     return(  
                     <li className = "post" key = {element.id}>
-                        <img src = {element.url} alt = "image" className = "image"/>
+                        <img src = {element.url} alt = {element.posterName} className = "image"/>
                         <p>Description: {element.description}</p>
                         <p>Author: {element.posterName}</p>
                         <p>Likes: {element.numBinned}</p>

@@ -5,7 +5,7 @@ import { useQuery } from '@apollo/client';
 
 const PopularImages = () => {
     const {loading, error, data} = useQuery(queries.GET_TOP_TEN_BINNED_IMAGES);
-    console.log(data);
+    // console.log(data);
     if(data){
         return (
             <div>
@@ -15,7 +15,7 @@ const PopularImages = () => {
                     data.getTopTenBinnedPosts.map(element =>{
                         return(  
                             <li className = "post" key = {element.id}>
-                                <img src = {element.url} alt = "image" className = "image"/>
+                                <img src = {element.url} alt = {element.posterName} className = "image"/>
                                 <p>Description: {element.description}</p>
                                 <p>Author: {element.posterName}</p>
                                 <p>Likes: {element.numBinned}</p>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useQuery, useMutation } from '@apollo/client' 
+import { useQuery } from '@apollo/client' 
 import queries from '../queries';
 import BinButton from './BinButton';
 import DeleteButton from './DeleteButton';
@@ -21,7 +21,7 @@ const MyPosts = () => {
                     {data.userPostedImages.map(element =>{
                     return(  
                         <li className = "post" key = {element.id}>
-                            <img src = {element.url} alt = "image" className = "image"/>
+                            <img src = {element.url} alt = {element.posterName} className = "image"/>
                             <p>Description: {element.description}</p>
                             <p>Author: {element.posterName}</p>
                             <p>Likes: {element.numBinned}</p>

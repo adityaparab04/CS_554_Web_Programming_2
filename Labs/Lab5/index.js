@@ -111,7 +111,7 @@ async function fetchTopTenBinnedPosts(){
         let popularBinList = [];
         // console.log(binImageList);
         for(const binImage of binImageList){
-            console.log(binImage)
+            // console.log(binImage)
             // await client.zAdd( "topImages", binImage.numBinned.toString(), JSON.stringify(binImage));
             await client.ZADD("topImages", {
                 score: binImage.numBinned.toString(),
