@@ -17,23 +17,22 @@ const MyPosts = () => {
                 <div className='newPostContainer'>
                     <Link to='/new-post' className='createPostLink'>Create a new post</Link>
                 </div>
-
+                <ul>
                     {data.userPostedImages.map(element =>{
-                    return( 
-                        <dl key={element.id} className="post">
-                            <img src = {element.url} alt = {element.posterName} className = "image"/> 
-                            <di ng-if="true">
-                            <dt>Description:</dt>
-                            <dd>{element.description}</dd>
-                            </di>
-                            <dt>Author:</dt>
-                            <dd>{element.posterName}</dd>
+                    return(  
+                        <li className = "post" key = {element.id}>
+                            <img src = {element.url} alt = {element.posterName} className = "image"/>
+                            <p>Description: {element.description}</p>
+                            <p>Author: {element.posterName}</p>
+                            <p>Likes: {element.numBinned}</p>
                             <BinButton element={element}/>
-                            <DeleteButton element ={element}/>
-                        </dl>
+                            <br/>
+                            <DeleteButton element={element}/>
+                        </li>
                         )}
                     )}  
-                </div>
+                </ul>
+            </div>
         )
     }else if(loading){
         return(

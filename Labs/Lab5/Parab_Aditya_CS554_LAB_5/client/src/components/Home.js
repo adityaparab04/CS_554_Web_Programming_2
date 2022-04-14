@@ -17,18 +17,13 @@ const Home = () => {
                 <ul>
                     {data.unsplashImages.map(element =>{
                     return(  
-                        <dl key={element.id} className="post">
-                            <img src = {element.url} alt = {element.posterName} className = "image"/> 
-                            <di ng-if="true">
-                            <dt>Description:</dt>
-                            <dd>{element.description}</dd>
-                            </di>
-                            <dt>Author:</dt>
-                            <dd>{element.posterName}</dd>
-                            <dt>Likes:</dt>
-                            <dd>{element.numBinned}</dd>
-                            <BinButton element={element}/>
-                        </dl>
+                    <li className = "post" key = {element.id}>
+                        <img src = {element.url} alt = {element.posterName} className = "image"/>
+                        <p>Description: {element.description}</p>
+                        <p>Author: {element.posterName}</p>
+                        <p>Likes: {element.numBinned}</p>
+                        <BinButton element={element}/>
+                    </li>
                     )}
                     )}  
                 </ul>

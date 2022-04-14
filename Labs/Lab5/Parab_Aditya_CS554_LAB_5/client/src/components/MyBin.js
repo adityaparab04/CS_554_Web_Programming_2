@@ -10,22 +10,19 @@ const MyBin = () => {
         return (
             <div>
                 <h2>My Binned Images</h2>
+                <ul>
                     {data.binnedImages.map(element =>{
                     return(  
-                        <dl key={element.id} className="post">
-                            <img src = {element.url} alt = {element.posterName} className = "image"/> 
-                            <di ng-if="true">
-                            <dt>Description:</dt>
-                            <dd>{element.description}</dd>
-                            </di>
-                            <dt>Author:</dt>
-                            <dd>{element.posterName}</dd>
-                            <dt>Likes:</dt>
-                            <dd>{element.numBinned}</dd>
+                        <li className = "post" key = {element.id}>
+                            <img src = {element.url} alt = {element.posterName} className = "image"/>
+                            <p>Description: {element.description}</p>
+                            <p>Author: {element.posterName}</p>
+                            <p>Likes: {element.numBinned}</p>
                             <BinButton element={element}/>
-                        </dl>
+                        </li>
                     )}
                     )}  
+                </ul>
             </div>
         )
     }else if(loading){
