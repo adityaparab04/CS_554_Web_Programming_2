@@ -10,6 +10,7 @@ const Home = () => {
         variables: {pageNum: pageNum}
     });
     const handleMore = () => setPageNum(pageNum + 1);
+    console.log(data.unsplashImages);
     if(data){
         return (
             <div>

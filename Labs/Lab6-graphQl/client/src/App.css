@@ -1,0 +1,108 @@
+.App {
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.App-header {
+  background-color: #CC0000;
+	height: 200px;
+	padding: 20px;
+	color: black;
+	position: relative;
+}
+
+.App-logo {
+  text-align: left;
+  margin-top: 0;
+  height: 150px;
+  padding-bottom: 10px;
+  position: relative;
+}
+
+.navLink{
+  padding: 0.3rem 0.6rem;
+  background-color: black;
+  border-radius: 3px;
+  color: white;
+  text-decoration: none !important;
+  margin: 5px;
+}
+
+.navLink:hover {
+  background-color: white;
+  border: 2px solid black;
+  color: black;
+  border-radius: 5px;
+}
+
+.title {
+  font-weight: bold;
+  color: #ec0e19;
+  text-decoration: none;
+  list-style: none;
+}
+
+.paginatedLink{
+  padding: 0.3rem 0.6rem;
+  background-color: black;
+  border-radius: 3px;
+  color: white;
+  text-decoration: none !important;
+  margin: 5px;
+}
+
+.paginatedLink:hover {
+  background-color: white;
+  border: 2px solid black;
+  color: black;
+  border-radius: 5px;
+}
+
+.addTrainerBtn, .selectTrainerBtn, .DeleteBtn{
+  margin-bottom: 20px;
+  background-color: #ec0e19;
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 3px;
+  box-shadow: 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.addTrainerBtn:hover, .selectTrainerBtn:hover, .DeleteBtn:hover{
+  background-color: white;
+  border: 2px solid #ec0e19;
+  border-radius: 3px;
+  padding: 5px;
+}
+
+.trainer-wrapper{
+  display: flex;
+  justify-content: space-around;
+  flex-grow: 3;
+  align-items: baseline;
+}
+
+.catchBtn, .releaseBtn{
+  padding: 3px 10px;
+  margin-bottom: 10px;
+  background-color: #ec0e19;
+  cursor: pointer;
+}
+
+.releaseBtn{
+  padding: 3px 10px;
+  margin-bottom: 10px;
+  background-color: green;
+  cursor: pointer;
+}
+
+.partyFullBtn{
+  padding: 3px 10px;
+  margin-bottom: 10px;
+  background-color: blue;
+  cursor: pointer;
+  color: white;
+}
+
+.home-container{
+  margin: auto 10rem;
+  width: auto;
+}
